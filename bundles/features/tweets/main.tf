@@ -9,7 +9,6 @@ data "terraform_remote_state" "iam" {
     bucket  = var.bucket_tfstate_name
     key     = "iam/terraform.tfstate"
     region  = var.aws_region
-    profile = var.aws_user
   }
 }
 
@@ -20,7 +19,6 @@ data "terraform_remote_state" "api" {
     bucket  = var.bucket_tfstate_name
     key     = "api/terraform.tfstate"
     region  = var.aws_region
-    profile = var.aws_user
   }
 }
 
