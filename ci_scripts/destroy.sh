@@ -11,7 +11,7 @@ then
     do
       echo "############## ENV SELECTED: ${env}"
       terraform workspace select ${env}
-      terraform destroy -auto-approve -target
+      terraform destroy -auto-approve
       if [[ ${?} != 0 ]]
       then
         exit 1
@@ -29,7 +29,7 @@ then
     do
       echo "############## ENV SELECTED: ${env}"
       terraform workspace select ${env}
-      terraform destroy -auto-approve -target
+      terraform destroy -auto-approve
       if [[ ${?} != 0 ]]
       then
         exit 1
