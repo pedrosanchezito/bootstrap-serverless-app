@@ -32,7 +32,7 @@ apply:
 destroy:
   stage: remove
   script:
-    - chmod +x ci_scripts/validate.sh
+    - chmod +x ci_scripts/destroy.sh
     - ./ci_scripts/destroy.sh
   only:
     - trash
