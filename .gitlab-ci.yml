@@ -27,7 +27,9 @@ apply:
   only:
     - merge_request
   except:
-    - trash
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "trash"
+
 
 destroy:
   stage: remove
