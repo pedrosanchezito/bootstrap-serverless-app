@@ -19,7 +19,8 @@ then
   if [ ${?} = 1 ]
   then
     exit 1
-  else
+  elif [ ${?} = 2 ]
+  then
     terraform apply -auto-approve
     if [ ${?} != 0 ]
     then
@@ -39,7 +40,8 @@ then
   if [ ${?} = 1 ]
   then
     exit 1
-  else
+  elif [ ${?} = 2 ]
+  then
     terraform apply -auto-approve
     if [ ${?} != 0 ]
     then
