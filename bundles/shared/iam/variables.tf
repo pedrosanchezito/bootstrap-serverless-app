@@ -15,6 +15,6 @@ variable "bucket_tfstate_name" {
 
 variable "project_name" {
   description = "Name of the project for naming and tagging purpose"
-  type        = "string"
+  type        = string
   default     = "serverless-app"
 }
