@@ -14,19 +14,20 @@ then
   terraform workspace select $ENV || terraform workspace new $ENV && terraform workspace select $ENV
   terraform plan -detailed-exitcode
 
-  echo ${?}
+  terraform apply -auto-approve
 
-  if [[ ${?} = "1" ]]
-  then
-    exit 1
-  elif [[ ${?} = "2" ]]
-  then
-    terraform apply -auto-approve
-    if [[ ${?} != "0" ]]
-    then
-      exit 1
-    fi
-  fi
+
+#  if [[ ${?} = "1" ]]
+#  then
+#    exit 1
+#  elif [[ ${?} = "2" ]]
+#  then
+#    terraform apply -auto-approve
+#    if [[ ${?} != "0" ]]
+#    then
+#      exit 1
+#    fi
+#  fi
 fi
 done
 
