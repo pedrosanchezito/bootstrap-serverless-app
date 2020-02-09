@@ -27,12 +27,14 @@ apply:
   only:
     - merge_request
   except:
-    - trash
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "trash"
+
 
 destroy:
   stage: remove
   script:
-    - chmod +x ci_scripts/validate.sh
+    - chmod +x ci_scripts/destroy.sh
     - ./ci_scripts/destroy.sh
   only:
     - trash
