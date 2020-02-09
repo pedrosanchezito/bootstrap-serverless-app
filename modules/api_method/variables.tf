@@ -1,0 +1,14 @@
+variable "api_gw_id" {}
+variable "api_resource_id" {}
+variable "http_method" {}
+variable "integration_http_method" {}
+variable "authorization" {}
+variable "type" {}
+variable "uri" {}
+variable "integration_request_templates" {}
+variable "integration_response_needed" {}
+variable "integration_status_code" {}
+variable "integration_response_parameters" {}
+variable "response_status_code" {}
+variable "response_response_parameters" {}
+variable "response_response_model" {}

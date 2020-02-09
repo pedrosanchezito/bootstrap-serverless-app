@@ -1,0 +1,20 @@
+# IDE files
+.env
+.idea
+
+# Python files
+__pycache__
+app/__pycache__
+venv
+
+# Pytest files
+.pytest_cache
+.coverage
+
+# Terraform files
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Logs files
+.logs/

@@ -1,0 +1,13 @@
+variable "project_name" {}
+variable "feature_name" {}
+variable "api_method" {}
+variable "lambda_description" {}
+variable "lambda_filename" {}
+variable "lambda_handler" {}
+variable "lambda_runtime" {}
+variable "lambda_role_arn" {}
+variable "aws_region" {}
+variable "aws_account" {}
+variable "api_gw_id" {}
+variable "api_gw_method_http_method" {}
+variable "api_gw_resource_path" {}

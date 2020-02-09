@@ -1,0 +1,37 @@
+image:
+  name: hashicorp/terraform:0.12.13
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+stages:
+  - test
+  - deploy
+  - remove
+
+validate:
+  stage: test
+  script:
+    - chmod +x ci_scripts/validate.sh
+    - ./ci_scripts/validate.sh
+  only:
+    - merge_request
+  except:
+    - trash
+
+apply:
+  stage: deploy
+  script:
+    - chmod +x ci_scripts/apply.sh
+    - ./ci_scripts/apply.sh
+  only:
+    - staging
+    - master
+
+destroy:
+  stage: remove
+  script:
+    - chmod +x ci_scripts/validate.sh
+    - ./ci_scripts/destroy.sh
+  only:
+    - trash
