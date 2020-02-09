@@ -55,7 +55,7 @@ resource "aws_api_gateway_method_response" "api_method_response" {
   response_parameters = var.response_response_parameters
   response_models     = var.response_response_model
 
-//  depends_on = [
-//    aws_api_gateway_method.api_method,
-//  ]
+  depends_on = [
+    aws_api_gateway_method.api_method,
+  ]
 }
