@@ -11,10 +11,11 @@ then
     do
       echo "############## ENV SELECTED: ${env}"
       terraform workspace select ${env}
-      terraform destroy -auto-approve
-      if [[ ${?} != 0 ]]
+      retry=1
+      if [[ `terraform destroy -auto-approve` = 1 ]] && [[ ${retry} > 0 ]]
       then
-        exit 1
+      	terraform destroy -auto-approve
+       	retry=0
       fi
     done
 fi
@@ -29,10 +30,11 @@ then
     do
       echo "############## ENV SELECTED: ${env}"
       terraform workspace select ${env}
-      terraform destroy -auto-approve
-      if [[ ${?} != 0 ]]
+      retry=1
+      if [[ `terraform destroy -auto-approve` = 1 ]] && [[ ${retry} > 0 ]]
       then
-        exit 1
+      	terraform destroy -auto-approve
+       	retry=0
       fi
     done
 fi
