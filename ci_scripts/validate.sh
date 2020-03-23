@@ -1,7 +1,7 @@
 #!/bin/sh
 
-for shared in $(find /builds/julien-j/bootstrap-serverless-app/bundles/shared/ -maxdepth 1 -type d)
-do if [[ ${shared} != "/builds/julien-j/bootstrap-serverless-app/bundles/shared/" ]]
+for shared in $(find /builds/${PROJECT_PATH}/bundles/shared/ -maxdepth 1 -type d)
+do if [[ ${shared} != "/builds/${PROJECT_PATH}/bundles/shared/" ]]
 then
   cd ${shared}
   echo "############# VALIDATING ${shared} ..."
@@ -13,8 +13,8 @@ then
 fi
 done
 
-for feature in $(find /builds/julien-j/bootstrap-serverless-app/bundles/features/ -maxdepth 1 -type d)
-do if [[ ${feature} != "/builds/julien-j/bootstrap-serverless-app/bundles/features/" ]]
+for feature in $(find /builds/${PROJECT_PATH}/bundles/features/ -maxdepth 1 -type d)
+do if [[ ${feature} != "/builds/${PROJECT_PATH}/bundles/features/" ]]
 then
   cd ${feature}
   echo "############# VALIDATING ${feature} ..."
