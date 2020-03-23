@@ -37,6 +37,7 @@ Some environment variables need to be added in your-project/Settings/CI/CD/Varia
 | TF_VAR_project_name           | The name of the project for resources tagging purpose |
 | TF_VAR_bucket_tfstate_name    | AWS S3 bucket name that will keep all tf states |
 | TF_VAR_dynamodb_tfstate_table | AWS DynamoDB table name that will be used to lock Terraform deployments |
+| PROJECT_PATH                  | The project path, ie everything after `gitlab.com/` (for example: `user/bootstrap-serverless-app`) |
 
 ## Deployment
 ### Workflow
