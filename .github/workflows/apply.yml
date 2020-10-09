@@ -19,12 +19,14 @@ jobs:
           TF_VAR_PROJECT_NAME: ${{ secret.TF_VAR_PROJECT_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secret.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secret.AWS_SECRET_ACCESS_KEY }}
+        run:
+          echo $TARGET_BRANCH
       - name: validate
         run:
           chmod +x .ci-scripts/validate.sh
           .ci-scripts/validate.sh bundles
       - name: deploy    
         run:
-          echo $TARGET_BRANCH
+
           chmod +x ./.ci-scripts/apply.sh
           ./.ci-scripts/apply.sh $TARGET_BRANCH bundles
