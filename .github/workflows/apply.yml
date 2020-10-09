@@ -1,8 +1,5 @@
-name: deploy
-on: 
-  push:
-    branches:
-      [staging, master]
+name: cicd
+on: [push]
 jobs:
     deploy:
       runs-on: ubuntu-latest
@@ -11,7 +8,6 @@ jobs:
         uses: actions/checkout@v2
       - name: load_envvars
         env:
-          TARGET_BRANCH: ${{ github.ref }}
           TF_VAR_AWS_ACCOUNT: ${{ secret.TF_VAR_AWS_ACCOUNT }}
           TF_VAR_aws_region: ${{ secret.TF_VAR_AWS_REGION }}
           TF_VAR_bucket_tfstate_name: ${{ secret.TF_VAR_BUCKET_TFSTATE_NAME }}
@@ -19,14 +15,16 @@ jobs:
           TF_VAR_PROJECT_NAME: ${{ secret.TF_VAR_PROJECT_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secret.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secret.AWS_SECRET_ACCESS_KEY }}
-        run:
-          echo $TARGET_BRANCH
+        shell: bash
+        run: |
+          echo ${GITHUB_REF##*/}
+          export TARGET_BRANCH=${GITHUB_REF##*/}
       - name: validate
         run:
           chmod +x .ci-scripts/validate.sh
           .ci-scripts/validate.sh bundles
-      - name: deploy    
+      - name: deploy
+        if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
         run:
-
           chmod +x ./.ci-scripts/apply.sh
           ./.ci-scripts/apply.sh $TARGET_BRANCH bundles
