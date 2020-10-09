@@ -39,6 +39,8 @@ Some environment variables need to be added in your-project/Settings/CI/CD/Varia
 | TF_VAR_dynamodb_tfstate_table | AWS DynamoDB table name that will be used to lock Terraform deployments |
 | PROJECT_PATH                  | The project path, ie everything after `gitlab.com/` (for example: `user/bootstrap-serverless-app`) |
 
+### GITHUB
+
 ## Deployment
 ### Workflow
 Any new merge request will go through Terraform validation process, to control that 
