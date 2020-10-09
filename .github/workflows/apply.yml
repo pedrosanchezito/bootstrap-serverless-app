@@ -1,6 +1,7 @@
 name: cicd
 on: [push]
 jobs:
+  name: deploy
   runs-on: ubuntu-latest
   steps:
     - name: verify-terraform
