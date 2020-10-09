@@ -12,8 +12,8 @@ stages:
 validate:
   stage: test
   script:
-    - chmod +x ci_scripts/validate.sh
-    - ./ci_scripts/validate.sh
+    - chmod +x .ci-scripts/validate.sh
+    - ./.ci-scripts/validate.sh /builds/${PROJECT_PATH}/bundles
   except:
     - staging
     - master
@@ -22,8 +22,8 @@ validate:
 apply:
   stage: deploy
   script:
-    - chmod +x ci_scripts/apply.sh
-    - ./ci_scripts/apply.sh
+    - chmod +x .ci-scripts/apply.sh
+    - ./.ci-scripts/apply.sh $CI_MERGE_REQUEST_TARGET_BRANCH_NAME /builds/${PROJECT_PATH}/bundles
   only:
     - merge_request
   except:
@@ -34,7 +34,7 @@ apply:
 destroy:
   stage: remove
   script:
-    - chmod +x ci_scripts/destroy.sh
-    - ./ci_scripts/destroy.sh
+    - chmod +x .ci-scripts/destroy.sh
+    - ./.ci-scripts/destroy.sh /builds/${PROJECT_PATH}/bundles
   only:
     - trash
