@@ -7,4 +7,7 @@ jobs:
     - name: verify-terraform
       run: terraform --version
     - name: validate
-      run: ./.ci-scripts/validate.sh bundles 
+      run: |
+        pwd
+        ls
+        ./.ci-scripts/validate.sh bundles
