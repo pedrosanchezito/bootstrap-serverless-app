@@ -8,4 +8,4 @@ jobs:
       run: terraform --version
     - name: validate
       run:
-        /home/runner/work/bootstrap-serverless-app/bootstrap-serverless-app/.ci-scripts/validate.sh bundles
+        /home/runner/work/bootstrap-serverless-app/.ci-scripts/validate.sh bundles
