@@ -4,8 +4,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    - name: checkout
+      uses: actions/checkout@v2
     - name: verify-terraform
       run: terraform --version
     - name: validate
       run:
-        /home/runner/work/bootstrap-serverless-app/.ci-scripts/validate.sh bundles
+        ls
+        # /home/runner/work/bootstrap-serverless-app/.ci-scripts/validate.sh bundles
