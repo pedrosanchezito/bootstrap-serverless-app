@@ -23,8 +23,8 @@ jobs:
         run:
           chmod +x .ci-scripts/validate.sh
           .ci-scripts/validate.sh bundles
-      - name: deploy
-        if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
-        run:
-          chmod +x ./.ci-scripts/apply.sh
-          ./.ci-scripts/apply.sh $TARGET_BRANCH bundles
+      # - name: deploy
+      #   if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
+      #   run:
+      #     chmod +x ./.ci-scripts/apply.sh
+      #     ./.ci-scripts/apply.sh $TARGET_BRANCH bundles
