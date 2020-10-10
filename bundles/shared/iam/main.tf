@@ -9,7 +9,7 @@ module "policy_lambda_logs" {
   target_resource    = null
   policy_name        = "${var.project_name}-${terraform.workspace}-lambda_logs_policy"
   policy_description = "Grant the permissions to write logs to Cloudwatch"
-  policy_content     = file("policies/lambda_logs.json")
+  policy_content     = file("policies/lambda_logs.json") # change for file("../../../policies/lambda_logs.json") if testing locally
 }
 
 module "policy_lambda_dynamodb" {
@@ -20,7 +20,7 @@ module "policy_lambda_dynamodb" {
   target_resource    = "table/${terraform.workspace}-tweets"
   policy_name        = "${var.project_name}-${terraform.workspace}-lambda_dynamodb_policy"
   policy_description = "Grant the permissions to use DynamoDB"
-  policy_content     = file("policies/lambda_dynamodb.json")
+  policy_content     = file("policies/lambda_dynamodb.json") # change for file("../../../policies/lambda_dynamodb.json") if testing locally
 }
 
 module "roles_lambda_dynamodb" {
@@ -28,7 +28,7 @@ module "roles_lambda_dynamodb" {
 
   role_name               = "${var.project_name}-${terraform.workspace}-lambda_dynamodb_role"
   role_description        = "Grant the lambda function the permissions to use DynamoDB"
-  role_assume_role_policy = file("policies/assume_role_lambda.json")
+  role_assume_role_policy = file("policies/assume_role_lambda.json") # change for file("../../../policies/assume_role_lambda.json") if testing locally
   role_policy_arn         = module.policy_lambda_dynamodb.policy_arn
   role_policy_logs_arn    = module.policy_lambda_logs.policy_arn
 }
