@@ -9,7 +9,7 @@ do
   for env in ${ENV}
     do
       echo "############## ENV SELECTED: ${env}"
-     terraform workspace select ${env}  $feature
+     terraform workspace select ${env} $feature
       retry=1
       if ! terraform destroy -auto-approve $feature && [[ ${retry} -gt 0 ]]
       then
