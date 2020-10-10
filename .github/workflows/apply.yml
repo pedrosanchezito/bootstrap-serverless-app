@@ -16,7 +16,7 @@ jobs:
           echo "TF_VAR_bucket_tfstate_name=${{ secrets.TF_VAR_BUCKET_TFSTATE_NAME }}" >> $GITHUB_ENV
           echo "TF_VAR_dynamodb_tfstate_table=${{ secrets.TF_VAR_DYNAMODB_TFSTATE_TABLE }}" >> $GITHUB_ENV
           echo "TF_VAR_PROJECT_NAME=${{ secrets.TF_VAR_PROJECT_NAME }}" >> $GITHUB_ENV
-          echo "TARGET_BRANCH=${GITHUB_REF##*/}"
+          echo "TARGET_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
         # export TARGET_BRANCH=${GITHUB_REF##*/}
       - name: Validate Terraform
         id: validate_tf
