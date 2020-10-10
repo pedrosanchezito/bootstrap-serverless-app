@@ -17,10 +17,11 @@ jobs:
           echo "TF_VAR_dynamodb_tfstate_table=${{ secrets.TF_VAR_DYNAMODB_TFSTATE_TABLE }}" >> $GITHUB_ENV
           echo "TF_VAR_PROJECT_NAME=${{ secrets.TF_VAR_PROJECT_NAME }}" >> $GITHUB_ENV
           echo "TARGET_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo $TARGET_BRANCH
+          echo ${{ github.ref}}
         # export TARGET_BRANCH=${GITHUB_REF##*/}
       - name: Validate Terraform
         id: validate_tf
-        if: github.ref != 'refs/heads/staging' || github.ref != 'refs/heads/master' || github.ref != 'refs/heads/trash'
         run: |
           chmod +x .ci-scripts/validate.sh
           .ci-scripts/validate.sh bundles

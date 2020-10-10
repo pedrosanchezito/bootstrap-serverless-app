@@ -49,7 +49,7 @@ module "tweets_get_lambda" {
   feature_name              = "tweets"
   api_method                = "get"
   lambda_description        = "GET all or specific messages"
-  lambda_filename           = "../../../lambda/tweets_get.zip"
+  lambda_filename           = "lambda/tweets_get.zip" # change for ../../../lambda/tweets_get.zip for local testing
   lambda_handler            = "lambda_function.lambda_handler"
   lambda_runtime            = "python3.7"
   lambda_role_arn           = data.terraform_remote_state.iam.outputs.role_dynamodb.role_arn
@@ -67,7 +67,7 @@ module "tweets_post_lambda" {
   feature_name              = "tweets"
   api_method                = "post"
   lambda_description        = "POST or UPDATE a message"
-  lambda_filename           = "../../../lambda/tweets_post.zip"
+  lambda_filename           = "lambda/tweets_post.zip" # change for ../../../lambda/tweets_post.zip for local testing
   lambda_handler            = "lambda_function.lambda_handler"
   lambda_runtime            = "python3.7"
   lambda_role_arn           = data.terraform_remote_state.iam.outputs.role_dynamodb.role_arn
@@ -85,7 +85,7 @@ module "tweets_delete_lambda" {
   feature_name              = "tweets"
   api_method                = "delete"
   lambda_description        = "DELETE a specific messages"
-  lambda_filename           = "../../../lambda/tweets_delete.zip"
+  lambda_filename           = "lambda/tweets_delete.zip" # change for ../../../lambda/tweets_delete.zip for local testing
   lambda_handler            = "lambda_function.lambda_handler"
   lambda_runtime            = "python3.7"
   lambda_role_arn           = data.terraform_remote_state.iam.outputs.role_dynamodb.role_arn
