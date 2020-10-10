@@ -23,7 +23,7 @@ jobs:
         id: validate_tf
         run:
           chmod +x .ci-scripts/validate.sh
-          .ci-scripts/validate.sh bundles
+          echo "::workflow-command::.ci-scripts/validate.sh bundles"
       - name: Deploy
         id: deploy
         if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
