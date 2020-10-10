@@ -8,23 +8,22 @@ jobs:
         uses: actions/checkout@v2
       - name: Load Variables
         id: load_envvars
-        env:
-          TF_VAR_AWS_ACCOUNT: ${{ secrets.TF_VAR_AWS_ACCOUNT }}
-          TF_VAR_aws_region: ${{ secrets.TF_VAR_AWS_REGION }}
-          TF_VAR_bucket_tfstate_name: ${{ secrets.TF_VAR_BUCKET_TFSTATE_NAME }}
-          TF_VAR_dynamodb_tfstate_table: ${{ secrets.TF_VAR_DYNAMODB_TFSTATE_TABLE }}
-          TF_VAR_PROJECT_NAME: ${{ secrets.TF_VAR_PROJECT_NAME }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          echo ${GITHUB_REF##*/}
-          echo $TF_VAR_aws_region
-          export TARGET_BRANCH=${GITHUB_REF##*/}
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "TF_VAR_AWS_ACCOUNT=${{ secrets.TF_VAR_AWS_ACCOUNT }}" >> $GITHUB_ENV
+          echo "TF_VAR_aws_region=${{ secrets.TF_VAR_AWS_REGION }}" >> $GITHUB_ENV
+          echo "TF_VAR_bucket_tfstate_name=${{ secrets.TF_VAR_BUCKET_TFSTATE_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_dynamodb_tfstate_table=${{ secrets.TF_VAR_DYNAMODB_TFSTATE_TABLE }}" >> $GITHUB_ENV
+          echo "TF_VAR_PROJECT_NAME=${{ secrets.TF_VAR_PROJECT_NAME }}" >> $GITHUB_ENV
+          echo "TARGET_BRANCH=${GITHUB_REF##*/}"
+        # export TARGET_BRANCH=${GITHUB_REF##*/}
       - name: Validate Terraform
         id: validate_tf
+        if: github.ref != 'refs/heads/staging' || github.ref != 'refs/heads/master' || github.ref != 'refs/heads/trash'
         run: |
           chmod +x .ci-scripts/validate.sh
-          .ci-scripts/validate.sh bundles ${{ secrets.TF_VAR_AWS_REGION }} ${{ secrets.TF_VAR_BUCKET_TFSTATE_NAME }} ${{ secrets.TF_VAR_DYNAMODB_TFSTATE_TABLE }}
+          .ci-scripts/validate.sh bundles
       - name: Deploy
         id: deploy
         if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
