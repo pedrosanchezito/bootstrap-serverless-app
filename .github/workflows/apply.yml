@@ -21,18 +21,18 @@ jobs:
           export TARGET_BRANCH=${GITHUB_REF##*/}
       - name: Validate Terraform
         id: validate_tf
-        run:
+        run: |
           chmod +x .ci-scripts/validate.sh
           echo "::workflow-command::.ci-scripts/validate.sh bundles"
       - name: Deploy
         id: deploy
         if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
-        run:
+        run: |
           chmod +x ./.ci-scripts/apply.sh
           ./.ci-scripts/apply.sh $TARGET_BRANCH bundles
       - name: Destroy
         id: destroy
         if: github.ref == 'refs/heads/trash'
-        run:
+        run: |
           chmod +x ./.ci-scripts/destroy.sh
           ./.ci-scripts/destroy.sh bundles
