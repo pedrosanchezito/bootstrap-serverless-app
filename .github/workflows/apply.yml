@@ -18,12 +18,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           echo ${GITHUB_REF##*/}
+          echo $TF_VAR_aws_region
           export TARGET_BRANCH=${GITHUB_REF##*/}
       - name: Validate Terraform
         id: validate_tf
         run: |
           chmod +x .ci-scripts/validate.sh
-          .ci-scripts/validate.sh bundles
+          .ci-scripts/validate.sh bundles ${{ secrets.TF_VAR_AWS_REGION }} ${{ secrets.TF_VAR_BUCKET_TFSTATE_NAME }} ${{ secrets.TF_VAR_DYNAMODB_TFSTATE_TABLE }}
       - name: Deploy
         id: deploy
         if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
