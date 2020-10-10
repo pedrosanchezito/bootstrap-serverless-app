@@ -3,11 +3,11 @@ on: [push]
 jobs:
     deploy:
       runs-on: ubuntu-latest
-      shell: bash
       steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: load_envvars
+      - name: Load Variables
+        id: load_envvars
         env:
           TF_VAR_AWS_ACCOUNT: ${{ secrets.TF_VAR_AWS_ACCOUNT }}
           TF_VAR_aws_region: ${{ secrets.TF_VAR_AWS_REGION }}
@@ -16,20 +16,22 @@ jobs:
           TF_VAR_PROJECT_NAME: ${{ secrets.TF_VAR_PROJECT_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        shell: bash
         run: |
           echo ${GITHUB_REF##*/}
           export TARGET_BRANCH=${GITHUB_REF##*/}
-      - name: validate
+      - name: Validate Terraform
+        id: validate_tf
         run:
           chmod +x .ci-scripts/validate.sh
           .ci-scripts/validate.sh bundles
-      - name: deploy
+      - name: Deploy
+        id: deploy
         if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
         run:
           chmod +x ./.ci-scripts/apply.sh
           ./.ci-scripts/apply.sh $TARGET_BRANCH bundles
-      - name: destroy
+      - name: Destroy
+        id: destroy
         if: github.ref == 'refs/heads/trash'
         run:
           chmod +x ./.ci-scripts/destroy.sh
