@@ -3,11 +3,11 @@ on: [push]
 jobs:
     deploy:
       runs-on: ubuntu-latest
+      shell: bash
       steps:
       - name: checkout
         uses: actions/checkout@v2
       - name: load_envvars
-        shell: bash
         env:
           TF_VAR_AWS_ACCOUNT: ${{ secrets.TF_VAR_AWS_ACCOUNT }}
           TF_VAR_aws_region: ${{ secrets.TF_VAR_AWS_REGION }}
@@ -21,18 +21,15 @@ jobs:
           echo ${GITHUB_REF##*/}
           export TARGET_BRANCH=${GITHUB_REF##*/}
       - name: validate
-        shell: bash
         run:
           chmod +x .ci-scripts/validate.sh
           .ci-scripts/validate.sh bundles
       - name: deploy
-        shell: bash
         if: github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/master'
         run:
           chmod +x ./.ci-scripts/apply.sh
           ./.ci-scripts/apply.sh $TARGET_BRANCH bundles
       - name: destroy
-        shell: bash
         if: github.ref == 'refs/heads/trash'
         run:
           chmod +x ./.ci-scripts/destroy.sh
