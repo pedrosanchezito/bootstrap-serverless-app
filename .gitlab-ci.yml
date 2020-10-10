@@ -14,10 +14,6 @@ validate:
   script:
     - chmod +x .ci-scripts/validate.sh
     - ./.ci-scripts/validate.sh /builds/${PROJECT_PATH}/bundles
-  except:
-    - staging
-    - master
-    - trash
 
 apply:
   stage: deploy
